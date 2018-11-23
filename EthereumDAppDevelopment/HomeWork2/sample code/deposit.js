@@ -12,7 +12,7 @@ web3.eth.getAccounts().then(function (accounts) {
 
     // accounts[0] deposit 3 ether
     bank.methods.deposit().send({
-            from: accounts[0],
+            from: accounts[1],
             gas: 3400000,
             value: web3.utils.toWei('3', 'ether')
         })

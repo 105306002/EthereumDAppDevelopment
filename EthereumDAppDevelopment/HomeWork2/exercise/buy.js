@@ -13,7 +13,7 @@ web3.eth.getAccounts().then(function (accounts) {
     bank.methods
         .buy(1)
         .send({
-            from: accounts[0],
+            from: accounts[1],
             gas: 3400000
         })
         .on("receipt", (receipt) => console.log(receipt))
