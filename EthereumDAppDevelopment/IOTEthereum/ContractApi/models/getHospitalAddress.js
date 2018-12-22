@@ -4,7 +4,7 @@ var Web3 = require('web3');
 var web3 = new Web3;
 web3.setProvider(new Web3.providers.HttpProvider("http://localhost:8545"));
 const config = require('../setting/contractConfig');
-//const unlockAccount = require('../unlock');
+const unlockAccount = require('./unlock');
 
 module.exports = async function getDeviceProviderAddress() {
     //先取得賬號
@@ -20,14 +20,14 @@ module.exports = async function getDeviceProviderAddress() {
     let result = {};
 
     // 解鎖
-    // let unlock = await unlockAccount(nowAccount, password);
-    // if (!unlock) {
-    //     return;
-    // }
+    let unlock = await unlockAccount(nowAccount, 'nccu');
+    if (!unlock) {
+        return;
+    }
 
     return new Promise((resolve, reject) => {
         HD.methods
-            .getDeviceProviderAddress()
+            .getHospitalAddress()
             .call({
                 from: nowAccount
             })
@@ -38,7 +38,7 @@ module.exports = async function getDeviceProviderAddress() {
                 console.log(result);
             })
             .catch(err => {
-                result.status = `contract getDeviceProviderAddress failed.`;
+                result.status = `contract getHospitalAddress failed.`;
                 result.error = err.toString();
                 reject(result);
 

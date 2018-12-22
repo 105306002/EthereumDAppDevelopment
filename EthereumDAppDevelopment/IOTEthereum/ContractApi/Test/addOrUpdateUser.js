@@ -10,13 +10,18 @@ const DPCode = '0x' + fs.readFileSync('../contract/DeviceProvider.bin').toString
 const HDAbi = JSON.parse(fs.readFileSync('../contract/HealthDevice.abi').toString());
 const HDAddress = fs.readFileSync('../contract/HealthDeviceAddress.txt').toString();
 const HDCode = '0x' + fs.readFileSync('../contract/HealthDevice.bin').toString();
-
+const unlockAccount = require('./unlock');
 
 let HD = new web3.eth.Contract(HDAbi, HDAddress);
 
 let result = {};
 
-web3.eth.getAccounts().then(function (accounts) {
+web3.eth.getAccounts().then(async function (accounts) {
+    let unlock = await unlockAccount(accounts[1], 'nccu');
+    if (!unlock) {
+        return;
+    }
+
     HD.methods
         .addOrUpdateUser(accounts[2])
         .send({
@@ -27,14 +32,12 @@ web3.eth.getAccounts().then(function (accounts) {
             result.hospitalAddress = res.events.addOrUpdateUserEvent.returnValues._hospitaladdress;
             result.userAddress = res.events.addOrUpdateUserEvent.returnValues._useraddress;
             result.time = res.events.addOrUpdateUserEvent.returnValues._time;
-            //resolve(result);
 
             console.log(result);
         })
         .catch(err => {
             result.status = `contract addOrUpdateUser failed.`;
             result.error = err.toString();
-            //reject(result);
 
             console.log(result);
         });

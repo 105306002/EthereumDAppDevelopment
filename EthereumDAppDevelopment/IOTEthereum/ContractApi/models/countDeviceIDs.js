@@ -8,7 +8,7 @@ web3.setProvider(new Web3.providers.HttpProvider("http://localhost:8545"));
 // const DPAddress = fs.readFileSync('./contract/DeviceProviderAddress.txt').toString();
 
 const config = require('../setting/contractConfig');
-//const unlockAccount = require('../unlock');
+const unlockAccount = require('./unlock');
 
 module.exports = async function countDeviceIDs() {
     //先取得賬號
@@ -24,10 +24,10 @@ module.exports = async function countDeviceIDs() {
     let result = {};
 
     // 解鎖
-    // let unlock = await unlockAccount(nowAccount, password);
-    // if (!unlock) {
-    //     return;
-    // }
+    let unlock = await unlockAccount(nowAccount, 'nccu');
+    if (!unlock) {
+        return;
+    }
 
     return new Promise((resolve, reject) => {
         DP.methods

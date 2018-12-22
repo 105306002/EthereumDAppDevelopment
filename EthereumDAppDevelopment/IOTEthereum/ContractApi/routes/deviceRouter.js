@@ -5,8 +5,8 @@ var deviceRouter = express.Router();
 deviceController = new DeviceController();
 
 deviceRouter.post('/addorupdateuser', deviceController.addOrUpdateUser);
-deviceRouter.put('/updatehealthdata', deviceController.updateHealthData);
-deviceRouter.get('/getdeviceprovideraddress', deviceController.getDeviceProviderAddress);
+deviceRouter.post('/updatehealthdata', deviceController.updateHealthData);
+deviceRouter.get('/getHospitalAddress', deviceController.getHospitalAddress);
 deviceRouter.get('/getuseraddress', deviceController.getUserAddress);
 //deviceRouter.get('/gethealthdata', deviceController.getHealthData);
 

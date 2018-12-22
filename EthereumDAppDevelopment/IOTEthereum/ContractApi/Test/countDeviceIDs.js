@@ -10,13 +10,17 @@ const DPCode = '0x' + fs.readFileSync('../contract/DeviceProvider.bin').toString
 const HDAbi = JSON.parse(fs.readFileSync('../contract/HealthDevice.abi').toString());
 const HDAddress = fs.readFileSync('../contract/HealthDeviceAddress.txt').toString();
 const HDCode = '0x' + fs.readFileSync('../contract/HealthDevice.bin').toString();
-
+const unlockAccount = require('./unlock');
 let DP = new web3.eth.Contract(DPAbi, DPAddress);
 
 let result = {};
 
 
-web3.eth.getAccounts().then(function (accounts) {
+web3.eth.getAccounts().then(async function (accounts) {
+    let unlock = await unlockAccount(accounts[0], 'nccu');
+    if (!unlock) {
+        return;
+    }
     DP.methods
         .countDeviceIDs()
         .call({

@@ -32,8 +32,8 @@ http://localhost:3000/device/addorupdateuser => 設定 user
 http://localhost:3000/device/updatehealthdata => 上傳健康資料
 ![1](updatehealthdata.png)
 
-http://localhost:3000/device/getdeviceprovideraddress =>  服務提供商位址
-![1](getdeviceprovideraddress.png)
+http://localhost:3000/device/gethospitaladdress =>  該設備的醫療機構
+![1](gethospitaladdress.png)
 
 http://localhost:3000/device/getuseraddress => user address
 ![1](getUserAddress.png)
