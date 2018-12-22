@@ -1,8 +1,8 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 contract Bank {
 	// 此合約的擁有者
-    address  private owner;
+    address payable private owner;
 
 	// 儲存所有會員的ether餘額
     mapping (address => uint256) private balance;
@@ -14,7 +14,7 @@ contract Bank {
     event DepositEvent(address indexed from, uint256 value, uint256 timestamp);
     event WithdrawEvent(address indexed from, uint256 value, uint256 timestamp);
     event TransferEvent(address indexed from, address indexed to, uint256 value, uint256 timestamp);
-
+    event TransferAdvancedEvent(address indexed from, address indexed to, uint256 value, uint256 timestamp);
     event MintEvent(address indexed from, uint256 value, uint256 timestamp);
     event BuyCoinEvent(address indexed from, uint256 value, uint256 timestamp);
     event TransferCoinEvent(address indexed from, address indexed to, uint256 value, uint256 timestamp);
@@ -26,7 +26,7 @@ contract Bank {
     }
 
 	// 建構子
-    constructor() public payable {
+    constructor() public  {
         owner = msg.sender;
     }
 
@@ -54,17 +54,26 @@ contract Bank {
 
 	// 轉帳
     function transfer(address to, uint256 etherValue) public {
-        uint256 weiValue = etherValue * 1 ether;
-
+        uint256 weiValue = etherValue * 1 ether;  
+        
         require(balance[msg.sender] >= weiValue, "your balances are not enough");
 
         balance[msg.sender] -= weiValue;
         balance[to] += weiValue;
 
         // emit TransferEvent
-        emit TransferEvent(msg.sender, to, etherValue, now);
+        emit TransferEvent(msg.sender, to, weiValue, now);
     }
+    function transferAdvanced(address to, uint256 weiValue) public { 
+        
+        require(balance[msg.sender] >= weiValue, "your balances are not enough");
 
+        balance[msg.sender] -= weiValue;
+        balance[to] += weiValue;
+
+        // emit TransferToEvent
+        emit TransferAdvancedEvent(msg.sender, to, weiValue, now);
+    }
 	// mint coin
     function mint(uint256 coinValue) public isOwner {
         
@@ -76,7 +85,7 @@ contract Bank {
         // emit MintEvent
         emit MintEvent(msg.sender,value,now);
     }
-
+    
 	// 使用 bank 中的 ether 向 owner 購買 coin
     function buy(uint256 coinValue) public {
         uint256 value = coinValue * 1 ether;
@@ -142,7 +151,7 @@ contract Bank {
     }
 
     // 轉移owner
-    function transferOwner(address newOwner) public isOwner {        
+    function transferOwner(address payable newOwner) public isOwner {        
         require(owner!=newOwner,"owner equals newOwner error");
         // emit TransferOwnerEvent
         emit TransferOwnerEvent(owner, newOwner,now);
@@ -150,7 +159,7 @@ contract Bank {
         owner = newOwner;       
     }
 
-    function kill() public isOwner {
+    function kill() public isOwner  {
         selfdestruct(owner);
     }
 }

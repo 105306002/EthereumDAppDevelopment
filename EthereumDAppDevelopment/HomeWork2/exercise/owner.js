@@ -15,5 +15,7 @@ web3.eth.getAccounts().then(function (accounts) {
         })
         .then((owner) => {
             console.log(owner);
-        });
+        })
+        .catch((err) => console.log(err));
+
 });

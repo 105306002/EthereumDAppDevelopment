@@ -1,12 +1,12 @@
-const fs = require('fs')
-const Web3 = require('/Users/tsaimingjhe/.nvm/versions/node/v11.0.0/lib/node_modules/web3')
+const fs = require('fs');
+const Web3 = require('/Users/tsaimingjhe/.nvm/versions/node/v11.0.0/lib/node_modules/web3');
 
-let web3 = new Web3('http://localhost:8545')
+let web3 = new Web3('http://localhost:8545');
 
-const abi = JSON.parse(fs.readFileSync('./bin/Bank.abi').toString())
-const bytecode = '0x' + fs.readFileSync('./bin/Bank.bin').toString()
+const abi = JSON.parse(fs.readFileSync('./bin/Bank.abi').toString());
+const bytecode = '0x' + fs.readFileSync('./bin/Bank.bin').toString();
 
-let bank = new web3.eth.Contract(abi)
+let bank = new web3.eth.Contract(abi);
 
 web3.eth.getAccounts().then(function (accounts) {
 

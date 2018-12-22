@@ -12,7 +12,7 @@ web3.eth.getAccounts().then(function (accounts) {
 
     // get ether in bank
     bank.methods.getBankBalance().call({
-            from: accounts[0]
+            from: accounts[1]
         })
         .then((balance) => {
             console.log(balance);
