@@ -1,0 +1,407 @@
+{
+    "abi": [
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "name": "weiValue",
+                    "type": "uint256"
+                }
+            ],
+            "name": "transferAdvanced",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "etherValue",
+                    "type": "uint256"
+                }
+            ],
+            "name": "withdraw",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [],
+            "name": "kill",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "transferOwner",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "getCoinBalance",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "getBankBalance",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "getOwner",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "name": "coinValue",
+                    "type": "uint256"
+                }
+            ],
+            "name": "transferCoin",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "coinValue",
+                    "type": "uint256"
+                }
+            ],
+            "name": "mint",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "name": "etherValue",
+                    "type": "uint256"
+                }
+            ],
+            "name": "transfer",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [],
+            "name": "deposit",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "coinValue",
+                    "type": "uint256"
+                }
+            ],
+            "name": "buy",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "value",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "DepositEvent",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "value",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "WithdrawEvent",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "value",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TransferEvent",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "value",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TransferAdvancedEvent",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "value",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "MintEvent",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "value",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "BuyCoinEvent",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "from",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "to",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "value",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": false,
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TransferCoinEvent",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "name": "oldOwner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "name": "newOwner",
+                    "type": "address"
+                },
+                {
+                    "indexed": false,
+                    "name": "timestamp",
+                    "type": "uint256"
+                }
+            ],
+            "name": "TransferOwnerEvent",
+            "type": "event"
+        }
+    ],
+    "bytecode": "608060405234801561001057600080fd5b5060008054600160a060020a03191633179055610ab3806100326000396000f3fe6080604052600436106100b95763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663285f74a281146100be5780632e1a7d4d146100f957806341c0e1b5146101235780634fb2e45d1461013857806356fbd78f1461016b5780637b83b50b14610192578063893d20e8146101a75780638dde60fa146101d8578063a0712d6814610211578063a9059cbb1461023b578063d0e30db014610274578063d96a094a1461027c575b600080fd5b3480156100ca57600080fd5b506100f7600480360360408110156100e157600080fd5b50600160a060020a0381351690602001356102a6565b005b34801561010557600080fd5b506100f76004803603602081101561011c57600080fd5b503561036b565b34801561012f57600080fd5b506100f7610452565b34801561014457600080fd5b506100f76004803603602081101561015b57600080fd5b5035600160a060020a03166104c2565b34801561017757600080fd5b506101806105fe565b60408051918252519081900360200190f35b34801561019e57600080fd5b50610180610611565b3480156101b357600080fd5b506101bc610624565b60408051600160a060020a039092168252519081900360200190f35b3480156101e457600080fd5b506100f7600480360360408110156101fb57600080fd5b50600160a060020a038135169060200135610633565b34801561021d57600080fd5b506100f76004803603602081101561023457600080fd5b5035610717565b34801561024757600080fd5b506100f76004803603604081101561025e57600080fd5b50600160a060020a0381351690602001356107dd565b6100f76108af565b34801561028857600080fd5b506100f76004803603602081101561029f57600080fd5b5035610907565b336000908152600160205260409020548111156102fb576040805160e560020a62461bcd02815260206004820152601c6024820152600080516020610a68833981519152604482015290519081900360640190fd5b33600081815260016020908152604080832080548690039055600160a060020a038616808452928190208054860190558051858152429281019290925280519293927f35098c24ea5ea47fdac6236140865b66c01a16a57712c5114cffd4b322167a279281900390910190a35050565b33600090815260016020526040902054670de0b6b3a76400008202908111156103cc576040805160e560020a62461bcd02815260206004820152601c6024820152600080516020610a68833981519152604482015290519081900360640190fd5b604051339082156108fc029083906000818181858888f193505050501580156103f9573d6000803e3d6000fd5b5033600081815260016020908152604091829020805485900390558151858152429181019190915281517f5bb95829671915ece371da722f91d5371159095dcabf2f75cd6c53facb7e1bab929181900390910190a25050565b600054600160a060020a031633146104b4576040805160e560020a62461bcd02815260206004820152601160248201527f796f7520617265206e6f74206f776e6572000000000000000000000000000000604482015290519081900360640190fd5b600054600160a060020a0316ff5b600054600160a060020a03163314610524576040805160e560020a62461bcd02815260206004820152601160248201527f796f7520617265206e6f74206f776e6572000000000000000000000000000000604482015290519081900360640190fd5b600054600160a060020a038281169116141561058a576040805160e560020a62461bcd02815260206004820152601b60248201527f6f776e657220657175616c73206e65774f776e6572206572726f720000000000604482015290519081900360640190fd5b600054604080514281529051600160a060020a038085169316917f587a4fcff87b7be11c779eb502f8b2584f996387d8b8cda0e5113fef424f7316919081900360200190a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b3360009081526002602052604090205490565b3360009081526001602052604090205490565b600054600160a060020a031690565b33600090815260026020526040902054670de0b6b3a76400008202908111156106a6576040805160e560020a62461bcd02815260206004820181905260248201527f796f757220636f696e42616c616e63657320617265206e6f7420656e6f756768604482015290519081900360640190fd5b33600081815260026020908152604080832080548690039055600160a060020a038716808452928190208054860190558051858152429281019290925280519293927f941d755df54ad0234b406209d0c923107cabf6d4f1ce335b8ae5d89d6a28c2d29281900390910190a3505050565b600054600160a060020a03163314610779576040805160e560020a62461bcd02815260206004820152601160248201527f796f7520617265206e6f74206f776e6572000000000000000000000000000000604482015290519081900360640190fd5b336000818152600260209081526040918290208054670de0b6b3a764000086029081019091558251818152429281019290925282519093927f8069ef4945469d029cc32e222031bccdc99b2eaaf4ee374cd268012f7ddee907928290030190a25050565b33600090815260016020526040902054670de0b6b3a764000082029081111561083e576040805160e560020a62461bcd02815260206004820152601c6024820152600080516020610a68833981519152604482015290519081900360640190fd5b33600081815260016020908152604080832080548690039055600160a060020a038716808452928190208054860190558051858152429281019290925280519293927fbabc8cd3bd6701ee99131f374fd2ab4ea66f48dc4e4182ed78fecb0502e44dd69281900390910190a3505050565b336000818152600160209081526040918290208054349081019091558251908152429181019190915281517fad40ae5dc69974ba932d08b0a608e89109412d41d04850f5196f144875ae2660929181900390910190a2565b60008054600160a060020a0316815260026020526040902054670de0b6b3a7640000820290811115610983576040805160e560020a62461bcd02815260206004820152601f60248201527f6f776e657227732062616c616e63657320617265206e6f7420656e6f75676800604482015290519081900360640190fd5b336000908152600160205260409020548111156109d8576040805160e560020a62461bcd02815260206004820152601c6024820152600080516020610a68833981519152604482015290519081900360640190fd5b336000818152600160209081526040808320805486900390558254600160a060020a03908116845281842080548701905584845260028352818420805487019055835416835291829020805485900390558151848152429181019190915281517f4c5ad1aea676c1e1613de5416105424342b84655de046903409dea58418bedff929181900390910190a2505056fe796f75722062616c616e63657320617265206e6f7420656e6f75676800000000a165627a7a72305820da596f34d61d94dc61f2f048d5266089422c2a8a8ab561d5ab7048c4c7d944e10029",
+    "functionHashes": {
+        "buy(uint256)": "d96a094a",
+        "deposit()": "d0e30db0",
+        "getBankBalance()": "7b83b50b",
+        "getCoinBalance()": "56fbd78f",
+        "getOwner()": "893d20e8",
+        "kill()": "41c0e1b5",
+        "mint(uint256)": "a0712d68",
+        "transfer(address,uint256)": "a9059cbb",
+        "transferAdvanced(address,uint256)": "285f74a2",
+        "transferCoin(address,uint256)": "8dde60fa",
+        "transferOwner(address)": "4fb2e45d",
+        "withdraw(uint256)": "2e1a7d4d"
+    },
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "547800",
+            "executionCost": "20873",
+            "totalCost": "568673"
+        },
+        "external": {
+            "buy(uint256)": "infinite",
+            "deposit()": "22349",
+            "getBankBalance()": "562",
+            "getCoinBalance()": "540",
+            "getOwner()": "669",
+            "kill()": "30740",
+            "mint(uint256)": "22681",
+            "transfer(address,uint256)": "infinite",
+            "transferAdvanced(address,uint256)": "infinite",
+            "transferCoin(address,uint256)": "43476",
+            "transferOwner(address)": "23339",
+            "withdraw(uint256)": "infinite"
+        }
+    }
+}
