@@ -34,6 +34,7 @@ module.exports = async function addOrUpdateUser(_conttractAddress, _userAddress)
                 gas: 3400000
             })
             .then(res => {
+                result.deviceContractAddress = res.events.addOrUpdateUserEvent.address;
                 result.hospitalAddress = res.events.addOrUpdateUserEvent.returnValues._hospitaladdress;
                 result.userAddress = res.events.addOrUpdateUserEvent.returnValues._useraddress;
                 result.time = res.events.addOrUpdateUserEvent.returnValues._time;

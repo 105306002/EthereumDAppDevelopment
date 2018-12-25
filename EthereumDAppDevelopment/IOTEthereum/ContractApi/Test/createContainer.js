@@ -18,34 +18,39 @@ let DP = new web3.eth.Contract(DPAbi, DPAddress);
 
 let result = {};
 
-web3.eth.getAccounts().then(async function (accounts) {
-    let unlock = await unlockAccount(accounts[0], 'nccu');
+web3.eth.getAccounts().then(function (accounts) {
+    let unlock = unlockAccount(accounts[0], 'nccu');
     if (!unlock) {
         return;
     }
 
     DP.methods
-        .createContainer(500, accounts[1])
+        .createContainer(91, accounts[1])
         .send({
             from: accounts[0],
             gas: 3400000
         })
-        .then(res => {
+        .then(function (res) {
             result.deviceId = res.events.deviceCreated.returnValues._deviceid;
             result.deviceContractAddress = res.events.deviceCreated.returnValues._devicecontractaddress;
             result.providerContractAddress = res.events.deviceCreated.returnValues._providercontractaddress;
             result.hospitalAddress = res.events.deviceCreated.returnValues._hospitaladdress;
             result.time = res.events.deviceCreated.returnValues._time;
-            //resolve(result);
-
-            fs.writeFileSync('../contract/HealthDeviceAddress.txt', res.events.deviceCreated.returnValues._devicecontractaddress);
-            console.log(result);
+            // fs.writeFileSync('../contract/HealthDeviceAddress.txt', res.events.deviceCreated.returnValues._devicecontractaddress);
+            console.log(res);
         })
         .catch(err => {
-            result.status = `contract createContainer failed.`;
-            result.error = err.toString();
-            //reject(result);
-
-            console.log(result);
+            console.log('error:' + err.returnValues)
         });
+
+
+    // DP.methods
+    //     .createContainer(90, accounts[1])
+    //     .send({
+    //         from: accounts[0],
+    //         gas: 3400000
+    //     })
+    //     .on('receipt', function (receipt) {
+    //         console.log('rec::' + receipt)
+    //     }).on('error', console.error);;
 });

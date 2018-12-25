@@ -41,7 +41,7 @@ module.exports = async function createContainer(_deviceId, _hospitalAddress) {
                 result.time = res.events.deviceCreated.returnValues._time;
                 resolve(result);
 
-                fs.writeFileSync('./contract/HealthDeviceAddress.txt', res.events.deviceCreated.returnValues._devicecontractaddress);
+                // fs.writeFileSync('./contract/HealthDeviceAddress.txt', res.events.deviceCreated.returnValues._devicecontractaddress);
                 console.log(result);
             })
             .catch(err => {

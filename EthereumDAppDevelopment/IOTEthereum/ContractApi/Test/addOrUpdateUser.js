@@ -22,23 +22,35 @@ web3.eth.getAccounts().then(async function (accounts) {
         return;
     }
 
+    // HD.methods
+    //     .addOrUpdateUser(accounts[2])
+    //     .send({
+    //         from: accounts[1],
+    //         gas: 3400000
+    //     })
+    //     .then(res => {
+    //         result.deviceContractAddress = res.events.addOrUpdateUserEvent.address;
+    //         result.hospitalAddress = res.events.addOrUpdateUserEvent.returnValues._hospitaladdress;
+    //         result.userAddress = res.events.addOrUpdateUserEvent.returnValues._useraddress;
+    //         result.time = res.events.addOrUpdateUserEvent.returnValues._time;
+
+    //         console.log(result);
+    //     })
+    //     .catch(err => {
+    //         result.status = `contract addOrUpdateUser failed.`;
+    //         result.error = err.toString();
+
+    //         console.log(result);
+    //     });
     HD.methods
         .addOrUpdateUser(accounts[2])
         .send({
             from: accounts[1],
             gas: 3400000
-        })
-        .then(res => {
-            result.hospitalAddress = res.events.addOrUpdateUserEvent.returnValues._hospitaladdress;
-            result.userAddress = res.events.addOrUpdateUserEvent.returnValues._useraddress;
-            result.time = res.events.addOrUpdateUserEvent.returnValues._time;
-
-            console.log(result);
-        })
-        .catch(err => {
-            result.status = `contract addOrUpdateUser failed.`;
-            result.error = err.toString();
-
-            console.log(result);
+        }, (err, ret) => {
+            if (err)
+                throw err;
+            console.log(ret);
         });
+
 });
