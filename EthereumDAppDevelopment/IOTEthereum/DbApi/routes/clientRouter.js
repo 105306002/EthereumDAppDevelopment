@@ -7,5 +7,6 @@ let client = new Client();
 router.get('/getuserdata', client.getUserData);
 router.get('/getdevicedata', client.getDeviceData);
 router.get('/gethealthdatabyuseraccount/:useraccount/:devicecontractaddress', client.getHealthDataByUserAccount);
-router.get('/gethealthdatabyuseraccount2', client.getHealthDataByUserAccount2);
+router.get('/gethealthdatabyuseraccountasc/:useraccount/:devicecontractaddress', client.getHealthDataByUserAccountAsc);
+router.get('/getHealthDataByUserAccountDesc/:useraccount/:devicecontractaddress', client.getHealthDataByUserAccountDesc);
 module.exports = router;

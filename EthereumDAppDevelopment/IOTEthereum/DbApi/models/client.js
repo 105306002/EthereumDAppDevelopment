@@ -1,7 +1,7 @@
 const dbcon = require('./connection_db');
 
 module.exports = class Client {
-    getUserData(req, res, next) {
+    async getUserData(req, res, next) {
         dbcon.query("SELECT * FROM user_data_tbl", function (err, retval, fields) {
             if (err) throw err;
 
@@ -10,7 +10,7 @@ module.exports = class Client {
             });
         });
     };
-    getDeviceData(req, res, next) {
+    async getDeviceData(req, res, next) {
         dbcon.query("SELECT * FROM device_tbl", function (err, retval, fields) {
             if (err) throw err;
 
@@ -19,7 +19,7 @@ module.exports = class Client {
             });
         });
     };
-    getHealthDataByUserAccount(req, res, next) {
+    async getHealthDataByUserAccount(req, res, next) {
         dbcon.query(`SELECT * from user_data_tbl as a  join transaction_tbl as b on a.user_account = b.user_account where b.user_account='${req.params.useraccount}' and b.device_contract_address='${req.params.devicecontractaddress}'`, function (err, retval, fields) {
             if (err) throw err;
 
@@ -28,13 +28,48 @@ module.exports = class Client {
             });
         });
     };
-    getHealthDataByUserAccount2(req, res, next) {
-        dbcon.query(`SELECT * from user_data_tbl as a INNER  join transaction_tbl as b on a.user_account = b.user_account`, function (err, retval, fields) {
+    async getHealthDataByUserAccountAsc(req, res, next) {
+        dbcon.query(`SELECT * from transaction_tbl nolock where user_account='${req.params.useraccount}' and device_contract_address='${req.params.devicecontractaddress}' ORDER by update_date limit 20`, function (err, retval, fields) {
             if (err) throw err;
 
             res.json({
                 result: retval
             });
         });
+    };
+    async getHealthDataByUserAccountDesc(req, res, next) {
+        dbcon.query(`SELECT * from transaction_tbl nolock where user_account='${req.params.useraccount}' and device_contract_address='${req.params.devicecontractaddress}' ORDER by update_date desc limit 30`, function (err, retval, fields) {
+            if (err) throw err;
+
+            res.json({
+                result: retval
+            });
+        });
+
+        // connection.beginTransaction(function (err) {
+        //     if (err) {
+        //         throw err;
+        //     }
+        //     var sql = `SELECT * from transaction_tbl nolock where user_account='${req.params.useraccount}' and device_contract_address='${req.params.devicecontractaddress}' ORDER by update_date desc limit 20`;
+        //     connection.query(sql, function (error, results, fields) {
+        //         if (error) {
+        //             return connection.rollback(function () {
+        //                 throw error;
+        //             });
+        //         }
+
+        //         connection.commit(function (err, retval) {
+        //             if (err) {
+        //                 return connection.rollback(function () {
+        //                     throw err;
+        //                 });
+        //             }
+        //             res.json({
+        //                 result: retval
+        //             });
+        //             console.log('success!');
+        //         });
+        //     });
+        // });
     };
 };
