@@ -65,7 +65,7 @@ contract HealthDevice{
     }
     
     function addOrUpdateUser(address _useraddress) public {
-        //只有設備提供商才能設定使用者
+        //只有醫療機構才能設定使用者
         require(hospitalAddress == msg.sender,"you are not hospital!"); 
         userAddress = _useraddress;
         emit addOrUpdateUserEvent(msg.sender,_useraddress,block.timestamp);
