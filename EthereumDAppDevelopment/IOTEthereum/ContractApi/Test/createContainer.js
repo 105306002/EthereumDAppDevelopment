@@ -19,7 +19,7 @@ let DP = new web3.eth.Contract(DPAbi, DPAddress);
 let result = {};
 
 web3.eth.getAccounts().then(function (accounts) {
-    let unlock = unlockAccount(accounts[0], 'nccu');
+    let unlock = unlockAccount(accounts[0], 'nccutest');
     if (!unlock) {
         return;
     }

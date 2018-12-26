@@ -19,10 +19,7 @@ let result = {};
 
 
 web3.eth.getAccounts().then(async function (accounts) {
-    let unlock = await unlockAccount(accounts[0], 'nccu');
-    if (!unlock) {
-        return;
-    }
+
     HD.methods
         .getHospitalAddress()
         .call()

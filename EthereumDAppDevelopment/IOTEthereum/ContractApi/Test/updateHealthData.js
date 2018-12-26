@@ -27,7 +27,7 @@ let HD = new web3.eth.Contract(HDAbi, HDAddress);
 let result = {};
 
 web3.eth.getAccounts().then(async function (accounts) {
-  let unlock = await unlockAccount(accounts[2], 'nccu');
+  let unlock = await unlockAccount(accounts[2], 'nccutest');
   if (!unlock) {
     return;
   }

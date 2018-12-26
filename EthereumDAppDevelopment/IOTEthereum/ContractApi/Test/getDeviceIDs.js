@@ -17,10 +17,7 @@ let DP = new web3.eth.Contract(DPAbi, DPAddress);
 let result = {};
 
 web3.eth.getAccounts().then(async function (accounts) {
-    let unlock = await unlockAccount(accounts[0], 'nccu');
-    if (!unlock) {
-        return;
-    }
+
     DP.methods
         .getDeviceIDs()
         .call()
