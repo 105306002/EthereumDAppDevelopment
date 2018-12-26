@@ -24,9 +24,7 @@ web3.eth.getAccounts().then(async function (accounts) {
     }
     HD.methods
         .getUserAddress()
-        .call({
-            from: accounts[0]
-        })
+        .call()
         .then(res => {
             result.userAddress = res;
             //resolve(result);

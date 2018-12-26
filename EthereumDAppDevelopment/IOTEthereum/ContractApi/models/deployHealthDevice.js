@@ -7,21 +7,17 @@ web3.setProvider(new Web3.providers.HttpProvider("http://localhost:8545"));
 const config = require('../setting/contractConfig');
 const unlockAccount = require('./unlock');
 
-module.exports = async function deployHealthDevice() {
+module.exports = async function deployHealthDevice(_nowAccount) {
     //先取得賬號
-    //let password = config.geth.password;
-    let nowAccount = "";
-    await web3.eth.getAccounts((err, res) => {
-        nowAccount = res[0]
-    });
-    console.log(`nowAccount:${nowAccount}`);
+
+    console.log(`nowAccount:${_nowAccount}`);
 
     let HD = new web3.eth.Contract(config.HD.abi);
 
     let result = {};
 
     // 解鎖
-    let unlock = await unlockAccount(nowAccount, 'nccu');
+    let unlock = await unlockAccount(_nowAccount, 'nccutest');
     if (!unlock) {
         return;
     }
@@ -31,10 +27,10 @@ module.exports = async function deployHealthDevice() {
         HD
             .deploy({
                 data: config.HD.bytecode,
-                arguments: [0, nowAccount]
+                arguments: [0, _nowAccount]
             })
             .send({
-                from: nowAccount,
+                from: _nowAccount,
                 gas: 3400000
             })
             .on('error', function (error) {

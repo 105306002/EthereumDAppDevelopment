@@ -6,5 +6,5 @@ utilityController = new UtilityController();
 
 utilityRouter.post('/deploydeviceprovider', utilityController.deployDeviceProvider);
 utilityRouter.post('/deployhealthdevice', utilityController.deployHealthDevice);
-
+utilityRouter.get('/getaccounts', utilityController.getAccounts);
 module.exports = utilityRouter;

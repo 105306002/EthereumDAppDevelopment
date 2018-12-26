@@ -6,7 +6,7 @@ var _getDeviceIDs = require('../models/getDeviceIDs');
 
 module.exports = class ProviderController {
     createContainer(req, res, next) {
-        _createContainer(parseInt(req.body.deviceid), req.body.hospitaladdress)
+        _createContainer(req.body.nowaccount, parseInt(req.body.deviceid), req.body.hospitaladdress)
             .then((result) => {
                 res.json({
                     result: result

@@ -25,9 +25,7 @@ web3.eth.getAccounts().then(async function (accounts) {
     }
     HD.methods
         .getHealthData()
-        .call({
-            from: accounts[0]
-        })
+        .call()
         .then(res => {
             result.heartBeat = res._heartBeat;
             result.spO2 = res._spO2;

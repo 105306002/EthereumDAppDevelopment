@@ -23,9 +23,11 @@ web3.eth.getAccounts().then(async function (accounts) {
     }
     DP.methods
         .countDeviceIDs()
-        .call({
-            from: accounts[0]
-        })
+        .call(
+            //     {
+            //     from: accounts[0]
+            // }
+        )
         .then(res => {
             result.count = res;
             //resolve(result);

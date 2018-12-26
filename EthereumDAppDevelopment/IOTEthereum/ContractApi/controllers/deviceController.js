@@ -6,7 +6,7 @@ var _getUserAddress = require('../models/getUserAddress');
 
 module.exports = class DeviceController {
     addOrUpdateUser(req, res, next) {
-        _addOrUpdateUser(req.body.contractaddress, req.body.useraddress)
+        _addOrUpdateUser(req.body.nowaccount, req.body.contractaddress, req.body.useraddress)
             .then((result) => {
                 res.json({
                     result: result

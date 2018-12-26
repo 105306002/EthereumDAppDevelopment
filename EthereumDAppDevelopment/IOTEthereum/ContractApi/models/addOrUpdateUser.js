@@ -6,13 +6,13 @@ web3.setProvider(new Web3.providers.HttpProvider("http://localhost:8545"));
 const config = require('../setting/contractConfig');
 const unlockAccount = require('./unlock');
 
-module.exports = async function addOrUpdateUser(_conttractAddress, _userAddress) {
+module.exports = async function addOrUpdateUser(_nowAccount, _conttractAddress, _userAddress) {
     //先取得賬號
     //let password = config.geth.password;
-    let nowAccount = "";
-    await web3.eth.getAccounts((err, res) => {
-        nowAccount = res[1]
-    });
+    // let nowAccount = "";
+    // await web3.eth.getAccounts((err, res) => {
+    //     nowAccount = res[1]
+    // });
     //console.log(`nowAccount:${nowAccount}`);
 
     //let HD = new web3.eth.Contract(config.HD.abi, config.HD.address);
@@ -20,7 +20,7 @@ module.exports = async function addOrUpdateUser(_conttractAddress, _userAddress)
     let result = {};
 
     //解鎖
-    let unlock = await unlockAccount(nowAccount, 'nccu');
+    let unlock = await unlockAccount(_nowAccount, 'nccutest');
     if (!unlock) {
         return;
     }
@@ -30,7 +30,7 @@ module.exports = async function addOrUpdateUser(_conttractAddress, _userAddress)
         HD.methods
             .addOrUpdateUser(_userAddress)
             .send({
-                from: nowAccount,
+                from: _nowAccount,
                 gas: 3400000
             })
             .then(res => {

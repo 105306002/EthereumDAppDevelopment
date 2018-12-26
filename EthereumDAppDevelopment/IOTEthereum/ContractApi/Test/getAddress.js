@@ -25,9 +25,7 @@ web3.eth.getAccounts().then(async function (accounts) {
 
     DP.methods
         .getAddress('500')
-        .call({
-            from: accounts[0]
-        })
+        .call()
         .then(res => {
             result.deviceAddress = res;
             //resolve(result);

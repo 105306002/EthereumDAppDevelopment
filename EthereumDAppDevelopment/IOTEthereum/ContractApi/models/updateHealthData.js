@@ -8,19 +8,14 @@ const unlockAccount = require('./unlock');
 
 module.exports = async function updateHealthData(_userAddress, _heartBeat, _spO2) {
 
-    //console.log(`userAddress:${_userAddress}`);
-
     let HD = new web3.eth.Contract(config.HD.abi, config.HD.address);
 
     let result = {};
 
-
-    let unlock = await unlockAccount(_userAddress, 'nccu');
+    let unlock = await unlockAccount(_userAddress, 'nccutest');
     if (!unlock) {
         return;
     }
-
-
     return new Promise((resolve, reject) => {
         HD.methods
             .updateHealthData(_heartBeat, _spO2)

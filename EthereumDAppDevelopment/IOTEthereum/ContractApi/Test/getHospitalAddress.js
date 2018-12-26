@@ -25,9 +25,7 @@ web3.eth.getAccounts().then(async function (accounts) {
     }
     HD.methods
         .getHospitalAddress()
-        .call({
-            from: accounts[0]
-        })
+        .call()
         .then(res => {
             result.deviceProviderAddress = res;
             //resolve(result);

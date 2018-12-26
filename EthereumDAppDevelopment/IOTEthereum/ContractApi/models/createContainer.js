@@ -6,21 +6,21 @@ web3.setProvider(new Web3.providers.HttpProvider("http://localhost:8545"));
 const config = require('../setting/contractConfig');
 const unlockAccount = require('./unlock');
 
-module.exports = async function createContainer(_deviceId, _hospitalAddress) {
+module.exports = async function createContainer(_nowAccount, _deviceId, _hospitalAddress) {
     //先取得賬號
     //let password = config.geth.password;
-    let nowAccount = "";
-    await web3.eth.getAccounts((err, res) => {
-        nowAccount = res[0]
-    });
-    console.log(`nowAccount:${nowAccount}`);
+    // let nowAccount = "";
+    // await web3.eth.getAccounts((err, res) => {
+    //     nowAccount = res[0]
+    // });
+    console.log(`nowAccount:${_nowAccount}`);
 
     let DP = new web3.eth.Contract(config.DP.abi, config.DP.address);
 
     let result = {};
 
     // 解鎖
-    let unlock = await unlockAccount(nowAccount, 'nccu');
+    let unlock = await unlockAccount(_nowAccount, 'nccutest');
     if (!unlock) {
         return;
     }
@@ -30,7 +30,7 @@ module.exports = async function createContainer(_deviceId, _hospitalAddress) {
         DP.methods
             .createContainer(_deviceId, _hospitalAddress)
             .send({
-                from: nowAccount,
+                from: _nowAccount,
                 gas: 3400000
             })
             .then(res => {
@@ -41,7 +41,7 @@ module.exports = async function createContainer(_deviceId, _hospitalAddress) {
                 result.time = res.events.deviceCreated.returnValues._time;
                 resolve(result);
 
-                // fs.writeFileSync('./contract/HealthDeviceAddress.txt', res.events.deviceCreated.returnValues._devicecontractaddress);
+                fs.writeFileSync('./contract/HealthDeviceAddress.txt', res.events.deviceCreated.returnValues._devicecontractaddress);
                 console.log(result);
             })
             .catch(err => {

@@ -11,23 +11,10 @@ const config = require('../setting/contractConfig');
 const unlockAccount = require('./unlock');
 
 module.exports = async function countDeviceIDs() {
-    //先取得賬號
-    //let password = config.geth.password;
-    let nowAccount = "";
-    await web3.eth.getAccounts((err, res) => {
-        nowAccount = res[0]
-    });
-    console.log(`nowAccount:${nowAccount}`);
 
     let DP = new web3.eth.Contract(config.DP.abi, config.DP.address);
-    //let DP = new web3.eth.Contract(DPAbi, DPAddress);
-    let result = {};
 
-    // 解鎖
-    let unlock = await unlockAccount(nowAccount, 'nccu');
-    if (!unlock) {
-        return;
-    }
+    let result = {};
 
     return new Promise((resolve, reject) => {
         DP.methods

@@ -7,21 +7,17 @@ web3.setProvider(new Web3.providers.HttpProvider("http://localhost:8545"));
 const config = require('../setting/contractConfig');
 const unlockAccount = require('./unlock');
 
-module.exports = async function deployDeviceProvider() {
+module.exports = async function deployDeviceProvider(_nowAccount) {
     //先取得賬號
-    //let password = config.geth.password;
-    let nowAccount = "";
-    await web3.eth.getAccounts((err, res) => {
-        nowAccount = res[0];
-    });
-    console.log(`nowAccount:${nowAccount}`);
+
+    console.log(`nowAccount:${_nowAccount}`);
 
     let DP = new web3.eth.Contract(config.DP.abi);
 
     let result = {};
 
     // 解鎖
-    let unlock = await unlockAccount(nowAccount, 'nccu');
+    let unlock = await unlockAccount(_nowAccount, 'nccutest');
     if (!unlock) {
         return;
     }
@@ -32,7 +28,7 @@ module.exports = async function deployDeviceProvider() {
                 data: config.DP.bytecode
             })
             .send({
-                from: nowAccount,
+                from: _nowAccount,
                 gas: 3400000
             })
             .on('error', function (error) {
