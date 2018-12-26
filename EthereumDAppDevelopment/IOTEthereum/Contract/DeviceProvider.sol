@@ -7,7 +7,7 @@ contract DeviceProvider{
     mapping(uint64 => address) deviceIDAddress;
     uint64[] private deviceIDs;
     
-    event deviceCreated(uint64 _deviceid,address indexed _devicecontractaddress,address indexed _providercontractaddress,address indexed _hospitaladdress,uint _time);
+    event deviceCreated(uint64 _deviceid,address indexed _devicecontractaddress,address indexed _hospitaladdress,uint _time);
 
     constructor () public {   
         deviceProviderAddress = msg.sender;
@@ -23,7 +23,7 @@ contract DeviceProvider{
         
         deviceIDs.push(_deviceID);
         
-        emit deviceCreated(_deviceID, address(subdevice),msg.sender,_hospitalAddress,block.timestamp);
+        emit deviceCreated(_deviceID, address(subdevice),_hospitalAddress,block.timestamp);
         return address(subdevice);
     }
     

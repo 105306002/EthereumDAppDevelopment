@@ -36,7 +36,7 @@ module.exports = async function createContainer(_nowAccount, _deviceId, _hospita
             .then(res => {
                 result.deviceId = res.events.deviceCreated.returnValues._deviceid;
                 result.deviceContractAddress = res.events.deviceCreated.returnValues._devicecontractaddress;
-                result.providerContractAddress = res.events.deviceCreated.returnValues._providercontractaddress;
+                result.providerContractAddress = res.events.deviceCreated.address;
                 result.hospitalAddress = res.events.deviceCreated.returnValues._hospitaladdress;
                 result.time = res.events.deviceCreated.returnValues._time;
                 resolve(result);

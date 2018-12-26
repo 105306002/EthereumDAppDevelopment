@@ -1,4 +1,4 @@
-var Web3 = require("web3")
+var Web3 = require('web3');
 // var web3 = new Web3
 // web3.setProvider(new Web3.providers.HttpProvider("http://localhost:8545"));
 
@@ -8,34 +8,33 @@ const web3 = new Web3('ws://localhost:8546');
 const connection = require('./connection_db');
 const config = require('../setting/contractConfig');
 
-
-var DP = new web3.eth.Contract(config.DP.abi, config.DP.address);
-var HD = new web3.eth.Contract(config.HD.abi, config.HD.address);
-
 var retval = {};
 module.exports = class Server {
     //創建設備時，偵測到事件寫入資料庫
     async createContainerEvent(req, res, next) {
+        var DP = new web3.eth.Contract(config.DP.abi, config.DP.address);
         let blocknumber;
-        // web3.eth.getBlockNumber()
-        //     .then(res => blocknumber = res);
-        await web3.eth.getBlockNumber((err, res) => blocknumber = res);
+
+        await web3.eth.getBlockNumber((err, res) => (blocknumber = res));
 
         retval.log = 'subscribeCreateContainerEvent';
         retval.blocknumber = blocknumber;
 
-        await DP.events.deviceCreated({
+        await DP.events
+            .deviceCreated({
                 // filter: {
                 //     myIndexedParam: [20, 23],
                 //     myOtherIndexedParam: '0x123456789...'
-                // }, 
+                // },
                 fromBlock: blocknumber
             })
             .on('data', function (event) {
-                console.log(event.returnValues._deviceid);
+                console.log(event);
                 //retval.output = event;
 
-                var sql = `delete from device_tbl where device_contract_address='${vent.returnValues._devicecontractaddress}'`;
+                var sql = `delete from device_tbl where device_contract_address='${
+                    event.returnValues._devicecontractaddress}'`;
+
                 connection.query(sql, function (error, results, fields) {
                     if (error) {
                         return connection.rollback(function () {
@@ -43,10 +42,11 @@ module.exports = class Server {
                         });
                     }
                 });
-                sql = `INSERT INTO device_tbl ( device_contract_address,provider_contract_address,hospital_account) VALUES ('${event.returnValues._devicecontractaddress}','${event.returnValues._providercontractaddress}','${event.returnValues._hospitaladdress}');`;
+                sql = `INSERT INTO device_tbl ( device_contract_address,provider_contract_address,hospital_account) VALUES ('${
+                event.returnValues._devicecontractaddress}','${event.address}','${event.returnValues._hospitaladdress}');`;
                 connection.query(sql, function (err, result) {
                     if (err) throw err;
-                    console.log("1 record inserted");
+                    console.log('1 record inserted');
                 });
             })
             .on('changed', function (event) {
@@ -57,20 +57,18 @@ module.exports = class Server {
         res.json({
             result: retval
         });
-    };
+    }
     //user上傳健康資料至區塊鏈，偵測到事件寫入資料庫．
     async updateHealthDataEvent(req, res, next) {
+        var HD = new web3.eth.Contract(config.HD.abi, req.body.contractaddress);
         let blocknumber;
-        await web3.eth.getBlockNumber()
-            .then(res => blocknumber = res);
+        await web3.eth.getBlockNumber().then(res => (blocknumber = res));
 
         retval.log = 'subscribeUpdateHealthDataEvent';
         retval.blocknumber = blocknumber;
-        HD.events.dataUploadEvent({
-                // filter: {
-                //     myIndexedParam: [20, 23],
-                //     myOtherIndexedParam: '0x123456789...'
-                // }, 
+
+        HD.events
+            .dataUploadEvent({
                 fromBlock: blocknumber
             })
             .on('data', function (event) {
@@ -88,7 +86,9 @@ module.exports = class Server {
                             });
                         }
                     });
-                    sql = `INSERT INTO transaction_tbl (transaction_hash,heartbeat_data,spo2_data,user_account,device_contract_address) VALUES ('${event.transactionHash}','${event.returnValues._heartbeat}','${event.returnValues._spO2}','${event.returnValues._useraddress}','${event.address}');`;
+                    sql = `INSERT INTO transaction_tbl (transaction_hash,heartbeat_data,spo2_data,user_account,device_contract_address) VALUES ('${event.transactionHash}','${event.returnValues._heartbeat}',
+                    '${event.returnValues._spO2}','${event.returnValues._useraddress}','${event.address}');`;
+
                     connection.query(sql, function (error, results, fields) {
                         if (error) {
                             return connection.rollback(function () {
@@ -114,5 +114,5 @@ module.exports = class Server {
         res.json({
             result: retval
         });
-    };
+    }
 };

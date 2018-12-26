@@ -6,7 +6,7 @@ web3.setProvider(new Web3.providers.HttpProvider("http://localhost:8545"));
 const config = require('../setting/contractConfig');
 const unlockAccount = require('./unlock');
 
-module.exports = async function addOrUpdateUser(_nowAccount, _conttractAddress, _userAddress) {
+module.exports = async function addOrUpdateUser(_nowAccount, _contractAddress, _userAddress) {
     //先取得賬號
     //let password = config.geth.password;
     // let nowAccount = "";
@@ -16,7 +16,7 @@ module.exports = async function addOrUpdateUser(_nowAccount, _conttractAddress, 
     //console.log(`nowAccount:${nowAccount}`);
 
     //let HD = new web3.eth.Contract(config.HD.abi, config.HD.address);
-    let HD = new web3.eth.Contract(config.HD.abi, _conttractAddress);
+    let HD = new web3.eth.Contract(config.HD.abi, _contractAddress);
     let result = {};
 
     //解鎖
@@ -24,7 +24,6 @@ module.exports = async function addOrUpdateUser(_nowAccount, _conttractAddress, 
     if (!unlock) {
         return;
     }
-
 
     return new Promise((resolve, reject) => {
         HD.methods
@@ -34,8 +33,8 @@ module.exports = async function addOrUpdateUser(_nowAccount, _conttractAddress, 
                 gas: 3400000
             })
             .then(res => {
-                result.deviceContractAddress = res.events.addOrUpdateUserEvent.address;
                 result.hospitalAddress = res.events.addOrUpdateUserEvent.returnValues._hospitaladdress;
+                result.deviceContractAddress = res.events.addOrUpdateUserEvent.address;
                 result.userAddress = res.events.addOrUpdateUserEvent.returnValues._useraddress;
                 result.time = res.events.addOrUpdateUserEvent.returnValues._time;
                 resolve(result);
