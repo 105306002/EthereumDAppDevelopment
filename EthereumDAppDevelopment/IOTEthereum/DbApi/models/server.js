@@ -60,6 +60,7 @@ module.exports = class Server {
     }
     //user上傳健康資料至區塊鏈，偵測到事件寫入資料庫．
     async updateHealthDataEvent(req, res, next) {
+        console.log(req.body.contractaddress)
         var HD = new web3.eth.Contract(config.HD.abi, req.body.contractaddress);
         let blocknumber;
         await web3.eth.getBlockNumber().then(res => (blocknumber = res));

@@ -7,7 +7,7 @@ const config = require('../setting/contractConfig');
 const unlockAccount = require('./unlock');
 
 module.exports = async function updateHealthData(_userAddress, _heartBeat, _spO2) {
-
+    console.log(config.HD.address)
     let HD = new web3.eth.Contract(config.HD.abi, config.HD.address);
 
     let result = {};
