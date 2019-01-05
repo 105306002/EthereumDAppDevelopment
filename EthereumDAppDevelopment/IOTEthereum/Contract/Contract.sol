@@ -73,7 +73,6 @@ contract HealthRecord{
     }
     
     function updateHealthData(uint _heartBeat,uint _spO2) public {
-        //只有使用者才能將資料上傳
         require(_heartBeat >= 0,"input error!");
         require(_spO2 >= 0,"input error!");
     
