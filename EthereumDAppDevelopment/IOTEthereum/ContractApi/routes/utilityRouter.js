@@ -1,10 +1,10 @@
 const express = require('express');
-const UtilityController = require('../controllers/utilityController');
+const Utility = require('../models/utility');
 var utilityRouter = express.Router();
 
-utilityController = new UtilityController();
+utility = new Utility();
 
-utilityRouter.post('/deploydeviceprovider', utilityController.deployDeviceProvider);
-utilityRouter.post('/deployhealthdevice', utilityController.deployHealthDevice);
-utilityRouter.get('/getaccounts', utilityController.getAccounts);
+// utilityRouter.post('/deploydeviceprovider', utility.deployDeviceProvider);
+// utilityRouter.post('/deployhealthdevice', utility.deployHealthDevice);
+utilityRouter.get('/getAccounts', utility.getAccounts);
 module.exports = utilityRouter;
