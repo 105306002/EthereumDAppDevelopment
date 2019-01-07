@@ -66,7 +66,7 @@ contract HealthRecord{
     
     mapping(uint64 => HealthData) healthDatas;
 
-    event dataUploadEvent(string userId ,uint heartBeat ,uint spO2);
+    event dataUploadEvent(string userId ,uint heartBeat ,uint spO2,uint timeStamp);
 
     constructor(string memory _userId) public {
         userId = _userId;  
@@ -76,6 +76,6 @@ contract HealthRecord{
         require(_heartBeat >= 0,"input error!");
         require(_spO2 >= 0,"input error!");
     
-        emit dataUploadEvent(userId,_heartBeat,_spO2);
+        emit dataUploadEvent(userId,_heartBeat,_spO2,block.timestamp);
     }  
 }
