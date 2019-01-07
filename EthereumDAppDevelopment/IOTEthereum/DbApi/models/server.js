@@ -96,11 +96,11 @@ module.exports = class Server {
                             });
                         }
                     });
-                    sql = `INSERT INTO transaction_tbl (transaction_hash,user_id,contract_address,heartbeat_data,spo2_data) VALUES ('${
+                    sql = `INSERT INTO transaction_tbl (transaction_hash,user_id,contract_address,heartbeat_data,spo2_data,update_date) VALUES ('${
             event.transactionHash
           }','${event.returnValues.userId}','${event.address}','${
             event.returnValues.heartBeat
-          }','${event.returnValues.spO2}');`;
+          }','${event.returnValues.spO2}','${event.returnValues.timeStamp}');`;
 
                     connection.query(sql, function (error, results, fields) {
                         if (error) {

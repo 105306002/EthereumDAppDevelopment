@@ -29,7 +29,7 @@ module.exports = class Client {
     async getHealthDataByUserAccountDesc(req, res, next) {
         //let userId = await web3.utils.sha3(req.params.userId);
 
-        dbcon.query(`SELECT * from transaction_tbl nolock where user_id='${req.params.userId}' and contract_address='${req.params.contractAddress}' ORDER by update_date desc limit 30`, function (err, retval, fields) {
+        dbcon.query(`SELECT transaction_hash,user_id,contract_address,heartbeat_data,spo2_data,FROM_UNIXTIME(update_date, '%Y-%m-%d %H:%i:%s') as update_date from transaction_tbl nolock where user_id='${req.params.userId}' and contract_address='${req.params.contractAddress}' ORDER by update_date desc limit 30`, function (err, retval, fields) {
             if (err) throw err;
 
             res.json({
